@@ -6,7 +6,7 @@ const sequelize = new Sequelize({
   port: 3306,
   username: 'root',
   password: null,
-  database: 'autopage',
+  database: 'autohouse',
 });
 
 module.exports = sequelize;

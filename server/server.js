@@ -5,11 +5,16 @@ const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true });
 
+
 const app = express();
 const port = 8082;
 
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.use(cors({
   origin: "http://localhost:3000",
@@ -35,11 +40,13 @@ app.use((req, res, next) => {
 const rolesRoutes = require('./routes/role.routes.js');
 const authRoutes = require('./routes/auth.routes.js');
 const usersRoutes = require('./routes/user.routes.js');
+const makeRoutes = require('./routes/make.routes.js');
 
 
 app.use('/api/roles', rolesRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/api/make', makeRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello, this is a backend API on port:" + port);

@@ -16,6 +16,7 @@ Make.init({
 }, {
   sequelize,
   modelName: 'Make',
+  tableName: 'makes',
 });
 
 module.exports = Make;

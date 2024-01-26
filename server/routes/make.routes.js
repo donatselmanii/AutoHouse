@@ -6,5 +6,6 @@ const router = express.Router();
 const upload = multer();
 
 router.post('/upload-image', upload.single('photo'), makeController.uploadImage);
+router.get('/all-photos', makeController.getAllMakes);
 
 module.exports = router;

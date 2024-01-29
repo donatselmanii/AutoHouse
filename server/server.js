@@ -3,8 +3,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
+const session = require('express-session');
 const csrfProtection = csrf({ cookie: true });
-
 
 const app = express();
 const port = 8082;
@@ -15,6 +15,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+app.use(
+  session({
+    secret: '735115c7136f27d0a230b7e4d73b80382e4ec092f610ba5785ad817fbe2d0486',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false, maxAge: 86400000 },
+  })
+);
 
 app.use(cors({
   origin: "http://localhost:3000",
@@ -36,12 +45,10 @@ app.use((req, res, next) => {
   next();
 });
 
-
 const rolesRoutes = require('./routes/role.routes.js');
 const authRoutes = require('./routes/auth.routes.js');
 const usersRoutes = require('./routes/user.routes.js');
 const makeRoutes = require('./routes/make.routes.js');
-
 
 app.use('/api/roles', rolesRoutes);
 app.use('/api/auth', authRoutes);

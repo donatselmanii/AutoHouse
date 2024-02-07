@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { errorHandler } = require('../error');
+require('dotenv').config();
 
 const checkUserRole = (allowedRoles) => {
     return async (req, res, next) => {
@@ -18,7 +19,7 @@ const checkUserRole = (allowedRoles) => {
                     return next(unauthorizedError);
                 }
 
-                jwt.verify(token, "7B&6$QyMv48gZ*aR@n!PbUt2Lj%zWsHs", (err, user) => {
+                jwt.verify(token, process.env.JWT_SECRET , (err, user) => {
                     if (err) {
                         const forbiddenError = errorHandler(403, 'Forbidden: Invalid token');
                         return next(forbiddenError);

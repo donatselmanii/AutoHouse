@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { errorHandler } = require('../error');
+require('dotenv').config();
 
 const verifyToken = (req, res, next) => {
   const token = req.cookies.token;
@@ -9,7 +10,7 @@ const verifyToken = (req, res, next) => {
     return next(unauthorizedError);
   }
 
-  jwt.verify(token, "7B&6$QyMv48gZ*aR@n!PbUt2Lj%zWsHs", (err, user) => {
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) {
       const forbiddenError = errorHandler(403, 'Forbidden');
       return next(forbiddenError);

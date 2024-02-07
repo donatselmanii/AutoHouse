@@ -1,6 +1,8 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const argon2 = require('argon2');
+require('dotenv').config();
+
 
 async function signup (req, res) {
   try {
@@ -11,7 +13,7 @@ async function signup (req, res) {
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
-}
+};
 
 async function signin(req, res) {
   try {
@@ -34,7 +36,7 @@ async function signin(req, res) {
 
     await user.update({ failedLoginAttempts: 0 });
 
-    const token = jwt.sign({ userId: user.id, roleId: user.roleId }, '7B&6$QyMv48gZ*aR@n!PbUt2Lj%zWsHs', { expiresIn: '1d' });
+    const token = jwt.sign({ userId: user.id, roleId: user.roleId }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
     req.session.userRole = user.roleId;
 
@@ -45,7 +47,7 @@ async function signin(req, res) {
     console.error('Error during login:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-}
+};
 
 
 const signout = (req, res) => {
@@ -64,9 +66,6 @@ const signout = (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
-
-
-
 
 
 

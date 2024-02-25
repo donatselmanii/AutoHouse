@@ -41,7 +41,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: '#F0F0F0', color: '#333333', padding: '20px', borderRadius: '8px' }}>
       <h5>Login</h5>
       <p>
         Don't have an account? <a href="/Register">Create Your Account</a> it takes less than a

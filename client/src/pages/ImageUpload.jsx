@@ -27,7 +27,7 @@ const ImageUpload = () => {
     formData.append('photo', selectedFile);
 
     try {
-      const response = await axios.post('http://localhost:8082/api/make/upload-image', formData, {
+      const response = await axios.post('http://localhost:8082/api/makes/upload-image', formData, {
         headers: {
           'X-CSRF-TOKEN': Cookies.get('XSRF-TOKEN'),
           'Content-Type': 'multipart/form-data',

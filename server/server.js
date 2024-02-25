@@ -52,18 +52,20 @@ app.use((req, res, next) => {
 const rolesRoutes = require('./routes/role.routes.js');
 const authRoutes = require('./routes/auth.routes.js');
 const usersRoutes = require('./routes/user.routes.js');
-const makeRoutes = require('./routes/make.routes.js');
+const makesRoutes = require('./routes/makes.routes.js');
 const typeRoutes = require('./routes/type.routes.js');
 const fuelRoutes = require('./routes/fuel.routes.js');
 const questionRoutes = require('./routes/question.routes.js');
+const postRoutes = require('./routes/post.routes.js');
 
 app.use('/api/roles', rolesRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', usersRoutes);
-app.use('/api/make', makeRoutes);
+app.use('/api/makes', makesRoutes);
 app.use('/api/type', typeRoutes);
 app.use('/api/fuel', fuelRoutes);
 app.use('/api/question', questionRoutes);
+app.use('/api/post', postRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello, this is a backend API on port:" + port);

@@ -39,6 +39,8 @@ async function signin(req, res) {
     const token = jwt.sign({ userId: user.id, roleId: user.roleId }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
     req.session.userRole = user.roleId;
+    req.session.userId = user.id;
+    console.log(req.session);
 
     res.cookie('token', token, { httpOnly: true, sameSite: 'none', secure: true, maxAge: 86400000 });
 

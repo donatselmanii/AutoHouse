@@ -1,10 +1,8 @@
 'use strict';
-/**
- * @type {import('sequelize-cli').Migration}
- */
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Fuel', {
+    await queryInterface.createTable('Models', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -14,6 +12,16 @@ module.exports = {
       name: {
         allowNull: false,
         type: Sequelize.STRING
+      },
+      id_extras: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Makes',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
       createdAt: {
         allowNull: false,
@@ -26,6 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Fuel');
+    await queryInterface.dropTable('Models');
   }
 };
